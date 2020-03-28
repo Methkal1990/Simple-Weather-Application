@@ -26,7 +26,7 @@ const updateUI = ({ cityDetails, weather }) => {
   }
 
   // update night/day & icon images
-//   let timeSrc = null;
+  //   let timeSrc = null;
   //   if (weather.IsDayTime) {
   //     timeSrc = "img/day.svg";
   //   } else {
@@ -63,4 +63,15 @@ cityForm.addEventListener("submit", e => {
       updateUI(data);
     })
     .catch(err => console.log(err));
+
+  localStorage.setItem("city", city);
 });
+
+// check if the city name is in the localStorage. if it is get the weather data automatically for that city
+if (localStorage.getItem("city")) {
+  updateCity(localStorage.getItem("city"))
+    .then(data => {
+      updateUI(data);
+    })
+    .catch(err => console.log(err));
+}
